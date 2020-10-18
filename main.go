@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"github.com/qiell/metrics-server/constants"
+	"github.com/qiell/metrics-server/events"
 	"github.com/qiell/metrics-server/store"
 	"github.com/qiell/metrics-server/store/inmemory"
 	"log"
@@ -11,6 +12,8 @@ import (
 
 func init() {
 	store.Object = inmemory.New()
+	events.MaxMetrics = events.NewMaxMetrics()
+	events.BrokerObject = events.NewBroker()
 }
 
 func main() {
@@ -51,7 +54,21 @@ func reportHandler(w http.ResponseWriter, r *http.Request) {
 	// if request method is of type GET, then process the request,
 	// otherwise return 500
 	if r.Method == constants.Get {
-		w.Write([]byte("request successful"))
+		// create an array of Metrics object
+		metrics := make([]events.Metrics, 0)
+		for _, value := range events.MaxMetrics {
+			// append the maximum metrics of each client in metrics object
+			metrics = append(metrics, value)
+		}
+		// Marshal the metrics object to json
+		response, err := json.Marshal(metrics)
+		if err != nil {
+			http.Error(w, "Error in marshalling response", http.StatusInternalServerError)
+		}
+		// set content type header
+		w.Header().Set(constants.ContentTypeHeader, constants.ApplicationJSON)
+		// send response
+		w.Write(response)
 		return
 	} else {
 		http.Error(w, "Invalid request method", http.StatusInternalServerError)
