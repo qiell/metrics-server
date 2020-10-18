@@ -66,3 +66,35 @@ Sample curl request:
         } 
     ] 
 ```
+
+### Directory structure
+```tree
+├── bin
+│   └── server
+├── build
+│   └── Dockerfile.metrics-server
+├── constants
+│   └── constants.go
+├── events
+│   ├── broker.go
+│   ├── metrics.go
+│   └── types.go
+├── main.go
+├── Makefile
+├── README.md
+├── scripts
+│   ├── build-server
+│   └── version
+└── store
+    ├── inmemory
+    │   └── inmemory.go
+    ├── store.go
+    └── types.go
+
+```
+
+### How to build and run? 
+- Copy or clone the repository to `$GOPATH/src/github.com/qiell/metrics-server`
+- Change directory to `$GOPATH/src/github.com/qiell/metrics-server`
+- Run `make` to build the container image
+- Use `docker run -p 8080:8080 <container-image-name>` to run the conatiner 

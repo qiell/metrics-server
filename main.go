@@ -11,6 +11,7 @@ import (
 )
 
 func init() {
+	// TODO: use config to determine the kind of Store like inMemory or DB
 	store.Object = inmemory.New()
 	events.MaxMetrics = events.NewMaxMetrics()
 	events.BrokerObject = events.NewBroker()
