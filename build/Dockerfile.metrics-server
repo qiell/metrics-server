@@ -1,0 +1,9 @@
+FROM golang:1.15.2
+
+WORKDIR /go/src/github.com/qiell/metrics-server
+
+COPY ./bin/server /
+
+CMD ["/server"]
+
+EXPOSE 8080
