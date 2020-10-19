@@ -42,7 +42,7 @@ func metricsHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		// add metrics to Store
-		store.Object.Add(r.Host, &metrics)
+		store.Object.Add(r.RemoteAddr, &metrics)
 		return
 	} else {
 		http.Error(w, "Invalid request method", http.StatusInternalServerError)
