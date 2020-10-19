@@ -10,6 +10,6 @@ type Broker struct {
 	Notifier chan Metrics
 }
 
-var MaxMetrics map[string]Metrics
+var MaxMetrics map[string]*Metrics
 
 var BrokerObject *Broker

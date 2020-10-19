@@ -8,8 +8,8 @@ func NewMetrics(ip string, cpu, memory int) *Metrics {
 	}
 }
 
-func NewMaxMetrics() map[string]Metrics {
-	metrics := make(map[string]Metrics)
+func NewMaxMetrics() map[string]*Metrics {
+	metrics := make(map[string]*Metrics)
 	return metrics
 }
 
@@ -18,7 +18,7 @@ func (m *Metrics) CalculateMax() {
 	metrics, ok := MaxMetrics[m.IP]
 	// if IP doesn't exists, then create a key and store the current metrics
 	if !ok {
-		MaxMetrics[m.IP] = *m
+		MaxMetrics[m.IP] = m
 		return
 	}
 
