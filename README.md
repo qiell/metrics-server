@@ -69,6 +69,7 @@ Sample curl request:
 
 ### Directory structure
 ```tree
+.
 ├── bin
 │   └── server
 ├── build
@@ -79,6 +80,9 @@ Sample curl request:
 │   ├── broker.go
 │   ├── metrics.go
 │   └── types.go
+├── go.mod
+├── handler
+│   └── handler.go
 ├── main.go
 ├── Makefile
 ├── README.md
